@@ -1,0 +1,77 @@
+<script>
+	// 工厂模式
+	function createPerson(name, age, job) {
+		var o = new Object();
+		o.name = name;
+		o.age = age;
+		o.job = job;
+		o.sayName = function() {
+			alert(this.name);
+		};
+		return o;
+	}
+	var person1 = createPerson("Nicholas", 29, "Software Engineer");
+	// 构造函数模式
+	function Person(name, age, job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = function() {
+			alert(this.name);
+		};
+	}
+	//原型模式
+	function Person() {
+	}
+	Person.prototype.name = "Nicholas";
+	Person.prototype.age = 29;
+	Person.prototype.job = "Software Engine"
+	Person.prototype.sayName = function() {
+		alert(this.name);
+	};
+	//组合使用构造函数模式和原型模式
+	function Person(name, age, job){
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.friends = ["shelby", "Court"];
+	}
+	Person.prototype = {
+		constructor: Person,
+		sayName: function() {
+			alert(this.name);
+		}
+	}
+	//动态原型模式
+	function Person(name, age, job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+	}
+	if (typeof this.sayName != "function") {
+		Person.prototype.sayName = function() {
+			alert(this.name);
+		};
+	}
+	//寄生构造函数模式
+	function Person(name, age, job) {
+		var o = new Object();
+		o.age = age;
+		o.name = name;
+		o.job = job;
+		o.sayName = function() {
+			alert(this.name);
+		};
+		return o;
+	}
+	// 和工厂模式仅有new的区别
+	var friend = new Person("Nicholas", 29, "Software Engineer");
+	//稳妥构造函数模式
+	function Person(name, age, job) {
+		var o = new Object();
+		o.sayNmae = function() {
+			alert(name);
+		};
+		return o;
+	}
+</script>

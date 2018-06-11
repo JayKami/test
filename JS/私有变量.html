@@ -1,0 +1,68 @@
+<script>
+	// 私有变量
+	function MyObject(){
+		//私有变量和私有函数
+		var privateVariable = 10;
+		function privateFunction(){
+			return false;	
+		}
+		//特权方法
+		this.publicMethod = function (){
+			privateVariable++;
+			return privateFunction();
+		};
+	}
+
+	// 静态私有变量(变量共有)
+	(function(){
+		//私有变量和私有函数
+		var privateVariable = 10;
+		function privateFunction(){
+			return false;
+		}
+		//构造函数
+		MyObject = function(){
+		};
+		//公有/特权方法
+		MyObject.prototype.publicMethod = function(){
+			privateVariable++;
+			return privateFunction();
+		};
+	})();
+
+	// 模块模式
+	var singleton = function() {
+		var privateVariable = 10;
+		function privateFunction() {
+			return false;
+		}
+
+		return {
+			publicProperty: true,
+			publicMethod: function() {
+				privateVariable++;
+				return privateFunction();
+			}
+		}
+	}
+
+	// 增强的模块模式
+	var singleton = function(){
+		var privateVariable = 10;
+
+		function privateFunction() {
+			return false;
+		}
+
+		var object = new CustomType();
+
+		object.publicProperty = true;
+
+		object.publicMethod = function(){
+			privateVariable++;
+			return privateFunction();
+		}
+
+		return object;
+	}
+</script>

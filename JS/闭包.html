@@ -1,0 +1,50 @@
+<script>
+	//因为闭包都显示10
+	// function createFunctions() {
+	// 	var result = new Array();
+
+	// 	for (var i = 0; i < 10; i++) {
+	// 		result[i] = function() {
+	// 			return i;
+	// 		}
+	// 	}
+
+	// 	return result;
+	// }
+	// 正确显示0到9
+	function createFunctions() {
+		var result = new Array();
+
+		for (var i = 0; i < 10; i++) {
+			result[i] = function(num) {
+				return function() {
+					return num;
+				};
+			}(i);
+		}
+
+		return result;
+	}
+	
+	var a = createFunctions();
+	for (var i = 0; i < 10; i++) {
+		console.log(a[i]());	
+	}
+
+	var name = "The Window";
+
+	var object = {
+		name: "My Object",
+
+		getNameFunc : function(){
+			var that = this;
+			return function() {
+				//return this.name;
+				return that.name;
+			};
+		}
+	};
+	
+	//因为闭包显示的是The Window 使用that就能正确显示了
+	console.log(object.getNameFunc()());
+</script>
